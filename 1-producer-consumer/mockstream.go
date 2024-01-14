@@ -12,11 +12,15 @@ import (
 	"time"
 )
 
-// GetMockStream is a blackbox function which returns a mock stream for
-// demonstration purposes
-func GetMockStream() Stream {
-	return Stream{0, mockdata}
+// ErrEOF returns on End of File error
+var ErrEOF = errors.New("End of File")
+
+type Streaming interface{
+	Next() (*Tweet, error)
 }
+
+var _ Streaming = (*Stream)(nil)
+
 
 // Stream is a mock stream for demonstration purposes, not threadsafe
 type Stream struct {
@@ -24,8 +28,12 @@ type Stream struct {
 	tweets []Tweet
 }
 
-// ErrEOF returns on End of File error
-var ErrEOF = errors.New("End of File")
+// GetMockStream is a blackbox function which returns a mock stream for
+// demonstration purposes
+func GetMockStream() Stream {
+	return Stream{0, mockdata}
+}
+
 
 // Next returns the next Tweet in the stream, returns EOF error if
 // there are no more tweets

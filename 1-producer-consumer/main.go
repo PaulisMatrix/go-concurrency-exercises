@@ -66,7 +66,6 @@ func main() {
 	stream := GetMockStream()
 
 	// use a chan for producer to add tweet to it and consumer to consume from
-
 	tweetChan := make(chan *Tweet)
 
 	// Producer
