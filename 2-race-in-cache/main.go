@@ -8,7 +8,10 @@
 
 package main
 
-import "container/list"
+import (
+	"container/list"
+	"testing"
+)
 
 // CacheSize determines how big the cache can grow
 const CacheSize = 100
@@ -75,17 +78,17 @@ func (l *Loader) Load(key string) string {
 	return val
 }
 
-func run() *KeyStoreCache {
+func run(t *testing.T) (*KeyStoreCache, *MockDB) {
 	loader := Loader{
 		DB: GetMockDB(),
 	}
 	cache := New(&loader)
 
-	RunMockServer(cache)
+	RunMockServer(cache, t)
 
-	return cache
+	return cache, loader.DB
 }
 
 func main() {
-	run()
+	run(nil)
 }

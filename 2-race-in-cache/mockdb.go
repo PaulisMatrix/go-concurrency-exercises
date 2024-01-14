@@ -6,19 +6,27 @@
 
 package main
 
-import "time"
+import (
+	"sync/atomic"
+	"time"
+)
 
 // MockDB used to simulate a database model
-type MockDB struct{}
+type MockDB struct{
+	Calls int32
+}
 
-// Get only returns an empty string, as this is only for demonstration purposes
-func (*MockDB) Get(key string) (string, error) {
+// Get only returns the key, as this is only for demonstration purposes
+func (db *MockDB) Get(key string) (string, error) {
 	d, _ := time.ParseDuration("20ms")
 	time.Sleep(d)
-	return "", nil
+	atomic.AddInt32(&db.Calls, 1)
+	return key, nil
 }
 
 // GetMockDB returns an instance of MockDB
 func GetMockDB() *MockDB {
-	return &MockDB{}
+	return &MockDB{
+		Calls: 0,
+	}
 }
