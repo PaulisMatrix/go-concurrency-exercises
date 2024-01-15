@@ -19,7 +19,7 @@ func thirdCall(third chan string) {
 	third <- "done"
 }
 
-func main() {
+func printInOrder() {
 	nums := []int{1, 2, 3}
 	first := make(chan string)
 	second := make(chan string)
