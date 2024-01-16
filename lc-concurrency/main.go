@@ -2,5 +2,6 @@ package main
 
 func main() {
 	// printInOrder()
-	alternateFooBar()
+	// alternateFooBar()
+	startFizzBuzzing()
 }
