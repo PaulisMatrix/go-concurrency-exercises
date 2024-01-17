@@ -3,5 +3,6 @@ package main
 func main() {
 	// printInOrder()
 	// alternateFooBar()
-	startFizzBuzzing()
+	// startFizzBuzzing()
+	startZeroEvenOdding()
 }

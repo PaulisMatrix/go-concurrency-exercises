@@ -2,6 +2,8 @@ package main
 
 import "fmt"
 
+// https://leetcode.com/problems/fizz-buzz-multithreaded/
+
 type FizzBuzz struct {
 	input chan int
 	done  chan bool
