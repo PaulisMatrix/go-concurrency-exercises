@@ -4,5 +4,6 @@ func main() {
 	// printInOrder()
 	// alternateFooBar()
 	// startFizzBuzzing()
-	startZeroEvenOdding()
+	// startZeroEvenOdding()
+	wineAndDine()
 }
