@@ -9,6 +9,15 @@ import (
 // https://leetcode.com/problems/the-dining-philosophers/description/
 // this is a variant of the above confusing problem statement
 
+/*Internals of sync.Mutex:
+
+mutex source: https://go.dev/src/sync/mutex.go
+
+semaphores source, which above mutex pkg uses to schedule/deschedule GOROUTINES, similar
+to kernel doing it for THREADS using futex operation: https://go.dev/src/sync/mutex.go
+
+*/
+
 type Fork struct {
 	pick sync.Mutex
 }

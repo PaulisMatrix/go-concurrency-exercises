@@ -10,7 +10,8 @@ import (
 // https://blog.stackademic.com/mutex-internals-in-golang-1624749f35a6
 
 // problem with this CAS operation is, the philosopher goroutines which wont be able to do a successful
-// CAS operation will just wait burning CPU cycles?
+// goroutine doing CAS operation will just wait burning CPU cycles?
+// (for loop will exit for below code but considering that its spinning forever to grab the unset flag)
 
 type ForkCAS struct {
 	// set, unset this flag for CAS operationn
@@ -55,6 +56,7 @@ func (p PhilosopherCAS) wantsToEatCAS(wg *sync.WaitGroup) {
 
 			// even if sleep is added. this is not deterministic since we don't know whether
 			// this philosopher routine is even awake to set the flag when the other one has unset it already.
+			// or wakes up exactly when the flag is up for grabs.
 		}
 
 	}
