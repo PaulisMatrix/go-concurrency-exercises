@@ -5,5 +5,6 @@ func main() {
 	// alternateFooBar()
 	// startFizzBuzzing()
 	// startZeroEvenOdding()
-	wineAndDine()
+	// wineAndDine()
+	wineAndDineCAS()
 }
