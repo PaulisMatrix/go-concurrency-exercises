@@ -15,8 +15,8 @@ import (
 
 type ForkCAS struct {
 	// set, unset this flag for CAS operationn
-	// set = 1 = Availble for pickup
-	// unset = 0 = Not Available for pickup
+	// set = 1 = Not Availble for pickup
+	// unset = 0 = Available for pickup
 	pickFlag uint32
 }
 
@@ -41,6 +41,8 @@ func (p PhilosopherCAS) wantsToEatCAS(wg *sync.WaitGroup) {
 			time.Sleep(2 * time.Second)
 
 			// unset the flags
+			// the sync pkg does the same for Unlock() but it adds -1 to the sema state(1 +(-1) = 0)
+			// atomic.AddInt32(&m.state, -mutexLocked)
 			atomic.StoreUint32(&p.left.pickFlag, 0)
 			atomic.StoreUint32(&p.right.pickFlag, 0)
 
@@ -69,7 +71,7 @@ func wineAndDineCAS() {
 
 	for i := 0; i < 5; i++ {
 		forks[i] = &ForkCAS{
-			pickFlag: 0, //suppose every fork is not initially available for adjacent philosopher to pick. They need to pick first.
+			pickFlag: 0, //suppose every fork is initially available for adjacent philosopher to pick.
 		}
 	}
 

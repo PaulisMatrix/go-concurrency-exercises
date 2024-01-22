@@ -17,6 +17,9 @@ func main() {
 }
 
 func gotchas() {
+	// semaphores can be used for both, for locking/guarding a critical section (mutext.Lock() and mutext.Unlock())
+	// as well as for ordering of process(sync.Waitgroup or chan). Both these pkgs use semaphores as synchornization primitive.
+
 	// sync.Mutex docs says that: A locked mutex is not "associated" with particular goroutine
 	// and it can be unlocked by an another goroutine as well.
 	// this is correct since remember, its using semaphore in the back and semaphores are just signally mechanism.

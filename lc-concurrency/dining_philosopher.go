@@ -14,7 +14,13 @@ import (
 mutex source: https://go.dev/src/sync/mutex.go
 
 semaphores source, which above mutex pkg uses to schedule/deschedule GOROUTINES, similar
-to kernel doing it for THREADS using futex operation: https://go.dev/src/sync/mutex.go
+to kernel doing it for THREADS using futex operation: https://go.dev/src/runtime/sema.go
+
+More about semaphores here:
+https://pages.cs.wisc.edu/~remzi/OSTEP/threads-sema.pdf
+https://w3.cs.jmu.edu/kirkpams/OpenCSF/Books/csf/html/CigSmokers.html
+https://github.com/Stolichnayer/sleeping_barber
+https://swtch.com/semaphore.pdf
 
 */
 
@@ -36,6 +42,17 @@ func (p Philosopher) wantsToEat(wg *sync.WaitGroup) {
 
 		// try to pick up the forks
 		// in C, this would be sem_wait(&p)
+		// sem_wait(&p) is a decrementing operation
+		/*
+			func sem_wait(p *semStruct){
+				p.semaState--
+				if p.semaState < 0{
+					// wait for someone else to release the lock
+					// keep spinning
+					// time.sleep(?)
+				}
+			}
+		*/
 		p.left.pick.Lock()
 		p.right.pick.Lock()
 
@@ -46,6 +63,13 @@ func (p Philosopher) wantsToEat(wg *sync.WaitGroup) {
 
 		// put down the forks
 		// in C, this would be sem_post(&p)
+		// sem_post(&p) is an incrementing operation.
+		/*
+			func sem_post(p *semStruct){
+				p.semaState++ //thats it, its only job is to atomically increment the state and exit
+			}
+
+		*/
 		p.left.pick.Unlock()
 		p.right.pick.Unlock()
 
