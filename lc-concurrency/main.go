@@ -12,7 +12,8 @@ func main() {
 	// startZeroEvenOdding()
 	// wineAndDine()
 	// wineAndDineCAS()
-	gotchas()
+	buildH2O()
+	// gotchas()
 
 }
 

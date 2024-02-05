@@ -18,9 +18,8 @@ to kernel doing it for THREADS using futex operation: https://go.dev/src/runtime
 
 More about semaphores here:
 https://pages.cs.wisc.edu/~remzi/OSTEP/threads-sema.pdf
-https://w3.cs.jmu.edu/kirkpams/OpenCSF/Books/csf/html/CigSmokers.html
-https://github.com/Stolichnayer/sleeping_barber
 https://swtch.com/semaphore.pdf
+semaphore lib in go: https://github.com/tmthrgd/go-sem
 
 */
 

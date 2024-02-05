@@ -7,13 +7,14 @@ import (
 	"time"
 )
 
+// https://github.com/cch123/golang-notes/blob/master/futex.md
 // problem with this CAS operation is, the philosopher goroutines which wont be able to do a successful CAS operation will just wait burning CPU cycles?
 // so don't waste CPU cycles and put them to sleep using kernel FUTEX calls
 
 type ForkFUTEX struct {
 	// set, unset this flag for CAS operationn
-	// set = 1 = Availble for pickup
-	// unset = 0 = Not Available for pickup
+	// unset = 0 = Available for pickup
+	// set = 1 = Not Availble for pickup
 	// wait = 2 = Put to sleep by futex kernel call when flag is NA
 	pickFlag uint32
 }
@@ -63,7 +64,7 @@ func wineAndDineFUTEX() {
 
 	for i := 0; i < 5; i++ {
 		forks[i] = &ForkFUTEX{
-			pickFlag: 0, //suppose every fork is not initially available for adjacent philosopher to pick. They need to pick first.
+			pickFlag: 0, //suppose every fork is initially available for adjacent philosopher to pick.
 		}
 	}
 

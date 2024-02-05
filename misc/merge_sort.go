@@ -20,16 +20,17 @@ func MergeSortConcurrent(mylist []int) []int {
 		var wg sync.WaitGroup
 
 		// wait for these merging to end
+		// each one has to wait for its child routine to finish merging
 		wg.Add(1)
 		go func() {
 			defer wg.Done()
-			left_array = MergeSort(mylist[:mid])
+			left_array = MergeSortConcurrent(mylist[:mid])
 		}()
 
 		wg.Add(1)
 		go func() {
 			defer wg.Done()
-			right_array = MergeSort(mylist[mid:])
+			right_array = MergeSortConcurrent(mylist[mid:])
 		}()
 
 		wg.Wait()
