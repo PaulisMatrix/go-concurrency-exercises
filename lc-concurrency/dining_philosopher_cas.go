@@ -74,6 +74,18 @@ func wineAndDineCAS() {
 			pickFlag: 0, //suppose every fork is initially available for adjacent philosopher to pick.
 		}
 	}
+	/*
+		you can init pickFlag to 1 as well, depicting every fork is available for the pickup
+		so sem_init(&p, 0, 1).
+		Semantics would be:
+			1. sem_wait(&p): decrements the value, no fork is available to pick up.
+			2. sem_post(&p): releases the value, fork is available for adjacent philosopher to pick up.
+
+		In my above implementation, I went with exact opposite semantics owing to what the sync.Mutex does.
+		"mutexLocked = 1 << iota // mutex is locked". 1 is Locked and 0 is UnLocked.
+		So 0 state for unlocked and 1 for locked. Above semantics makes more sense tbh.
+
+	*/
 
 	philosophers := make([]*PhilosopherCAS, 5)
 
