@@ -101,11 +101,13 @@
     
     *   More about semaphores:
     
-        a. https://pages.cs.wisc.edu/~remzi/OSTEP/threads-sema.pdf
+        a.  https://pages.cs.wisc.edu/~remzi/OSTEP/threads-sema.pdf
 
         b.  https://swtch.com/semaphore.pdf
+
+        c.  https://greenteapress.com/semaphores/LittleBookOfSemaphores.pdf
     
-    *   semaphore implementations(calling underlying C code or using syscalls): 
+    *  Semaphore implementations(calling underlying C code or using syscalls): 
 
         a.  https://github.com/tmthrgd/go-sem
 
