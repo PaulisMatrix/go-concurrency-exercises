@@ -42,7 +42,6 @@ func Crawl(url string, depth int, wg *sync.WaitGroup, throttle <-chan time.Time)
 		// called concurrently
 		go Crawl(u, depth-1, wg, throttle)
 	}
-	return
 }
 
 func main() {

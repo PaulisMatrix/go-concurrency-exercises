@@ -10,7 +10,7 @@ Crawl() must be called concurrently)
 
 This exercise can be solved in 3 lines only. If you can't do
 it, have a look at this:
-https://github.com/golang/go/wiki/RateLimiting
+https://go.dev/wiki/RateLimiting
 
 ## Test your solution
 
